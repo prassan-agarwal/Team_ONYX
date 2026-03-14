@@ -143,6 +143,54 @@ def predict_price():
     log_pred = model.predict(df_input)[0]
     return np.expm1(log_pred)
 
+def apply_business_rules(base_price):
+    price = base_price
+    
+    # 1. Cramped Layout Penalty (Less than 400 sqft per room)
+    sqft_per_room = carpet_area / bhk if bhk > 0 else 0
+    if sqft_per_room < 400:
+        # e.g., 200 sqft/room means a 50% deficit * 0.5 strictness = 25% price drop
+        cramped_deficit = (400 - sqft_per_room) / 400
+        penalty_percentage = min(cramped_deficit * 0.5, 0.30)  # Max 30% penalty
+        price *= (1 - penalty_percentage)
+        
+    # 2. Age Depreciation (older=cheaper)
+    age_penalty = min(property_age * 0.015, 0.50) # 1.5% per year, max 50%
+    price *= (1 - age_penalty)
+    
+    # 3. Tier Multiplier (Tier 2/3 must be significantly cheaper)
+    if locality_tier == 'Tier 2':
+        price *= 0.85 # 15% discount vs Tier 1 baseline
+    elif locality_tier == 'Tier 3':
+        price *= 0.70 # 30% discount vs Tier 1 baseline
+        
+    # 4. Wasted Balcony Penalty
+    if balcony_count > bhk:
+        excess_balconies = balcony_count - bhk
+        balcony_penalty = min(excess_balconies * 0.03, 0.15) # 3% per excess balcony, max 15%
+        price *= (1 - balcony_penalty)
+        
+    # 5. High Floor Premium (> 5th floor)
+    if floor_no > 5:
+        premium_floors = floor_no - 5
+        floor_premium = min(premium_floors * 0.005, 0.15) # 0.5% premium per floor, max 15%
+        price *= (1 + floor_premium)
+        
+    # 6. Distance Penalty (> 15km)
+    max_dist = max(dist_it_hub, dist_city)
+    if max_dist > 15:
+        dist_excess = max_dist - 15
+        dist_penalty = min(dist_excess * 0.01, 0.25) # 1% penalty per km, max 25%
+        price *= (1 - dist_penalty)
+        
+    # 7. Crime Rate Penalty (> 50)
+    if crime_rate > 50:
+        crime_excess = crime_rate - 50
+        crime_penalty = min(crime_excess * 0.005, 0.25) # 0.5% drop per point over 50, max 25%
+        price *= (1 - crime_penalty)
+        
+    return price
+
 st.markdown("---")
 # Centered predict button
 col1, col2, col3 = st.columns([1,2,1])
@@ -164,7 +212,44 @@ with col2:
             st.warning("Warning: Villas and Independent Houses rarely have more than 5 floors.")
         else:
             with st.spinner("Calculating via XGBoost..."):
-                price = predict_price()
-                st.success(f"### 🏠 Estimated Market Price: ₹ {price:,.2f}")
+                base_price = predict_price()
+                final_price = apply_business_rules(base_price)
+                
+                st.success(f"### 🏠 Estimated Market Price: ₹ {final_price:,.2f}")
+                if final_price < base_price:
+                    discount = (base_price - final_price) / base_price * 100
+                    st.caption(f"*(Note: Price was dynamically penalized by {discount:.1f}% due to strict property constraint formulas)*")
+                elif final_price > base_price:
+                    premium = (final_price - base_price) / base_price * 100
+                    st.caption(f"*(Note: Price includes a {premium:.1f}% premium for higher-floor advantages)*")
+                
+                # --------- SAVE TO CSV LOGIC ---------
+                # Convert the specific user choices into a dictionary for logging
+                log_data = {
+                    'City': city,
+                    'Locality_Tier': locality_tier,
+                    'BHK': bhk,
+                    'Bathrooms': bathrooms,
+                    'Super_Area_sqft': super_area,
+                    'Carpet_Area_sqft': carpet_area,
+                    'Floor_No': floor_no,
+                    'Total_Floors': total_floors,
+                    'Property_Age_years': property_age,
+                    'Property_Type': property_type,
+                    'Distance_to_IT_Hub_km': dist_it_hub,
+                    'Base_ML_Price': round(base_price, 2),
+                    'Predicted_Price_INR': round(final_price, 2)
+                }
+                
+                df_log = pd.DataFrame([log_data])
+                file_name = "prediction_logs.csv"
+                
+                import os
+                if not os.path.exists(file_name):
+                    df_log.to_csv(file_name, index=False)
+                else:
+                    df_log.to_csv(file_name, mode='a', header=False, index=False)
+                
+                st.info("💾 Prediction stored in `prediction_logs.csv`")
 
 

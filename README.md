@@ -191,7 +191,7 @@ Deployment link: https://teamonyx.streamlit.app/
 
 ---
 
-## 🏗️ Architecture Diagram
+## 🏗️ 1. Architecture Diagram
 
 ```mermaid
 graph TD;
@@ -214,7 +214,14 @@ graph TD;
     
     L --> N[Streamlit UI app.py];
     M --> N;
-    N --> O((End-User Predictions via Web));
+    
+    subgraph Containerization
+    N --> P[Dockerfile Build];
+    P --> Q[Isolated Docker Container 🐳];
+    end
+    
+    Q --> O((End-User Predictions via Web));
+    N -.- O;
 ```
 ---
 

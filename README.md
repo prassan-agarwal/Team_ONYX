@@ -288,8 +288,6 @@ IMAGE DALNA HAI
 
 # 📊 Visualizations
 
-# 📊 Visualizations
-
 ### Model Comparison
 ![Model Comparison](model_comparison.png)
 
@@ -312,7 +310,6 @@ Metrics shown:
 Streamlit deployment allows users to:
 
 - enter property details
-- upload CSV files
 - receive real-time predictions
 
 Deployment link: https://teamonyx.streamlit.app/

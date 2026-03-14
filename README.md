@@ -194,7 +194,7 @@ This repository includes a complete Dockerfile for seamless deployment. Containe
 
 ---
 
-## 🏗️ 1. Architecture Diagram
+## 🏗️ Architecture Diagram
 
 ```mermaid
 graph TD;
@@ -226,14 +226,6 @@ graph TD;
     Q --> O((End-User Predictions via Web));
     N -.- O;
 ```
----
-
-# 🔗 Repository
-
-GitHub Repo:
-
-https://github.com/prassan-agarwal/Team_ONYX
-
 ---
 
 ## 🚀 Setup and Usage Instructions

@@ -96,7 +96,7 @@ Provides **higher performance and faster computation** on structured datasets.
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" height="40"/>
 <img src="https://raw.githubusercontent.com/microsoft/LightGBM/master/docs/logo/LightGBM_logo_black_text.svg" height="40"/>
 <img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="40"/>
-<img src="[https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png](https://www.google.com/imgres?q=docker%20logo&imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2F1%2F1e%2FDocker_Logo.png&imgrefurl=https%3A%2F%2Fcommons.wikimedia.org%2Fwiki%2FFile%3ADocker_Logo.png&docid=lh2-nA-ByVPvUM&tbnid=3zr2Hd1vH7rq8M&vet=12ahUKEwjKw4-RqJ-TAxVbSmwGHWZJBikQnPAOegQIIxAB..i&w=9726&h=2213&hcb=2&ved=2ahUKEwjKw4-RqJ-TAxVbSmwGHWZJBikQnPAOegQIIxAB)" height="40">
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" height="40"/>
 
 </p>
 

@@ -268,7 +268,10 @@ Target Variable: Market_Price_INR
 
 Models tested:
 
-YAHAN PAR DALDO
+![xg_boost](xg_boost.jpeg)
+![light_gbm](light_gbm.jpeg)
+![gradient_boosting](gradient_boosting.jpeg)
+![tuned_model_comparision](tuned_model_comparision.jpeg)
 
 ---
 

@@ -224,21 +224,9 @@ GitHub Repo:
 
 https://github.com/prassan-agarwal/Team_ONYX
 
-
 ---
 
-# 👥 Contributors
-
-| Reg No | ID | Name |
-|------|------|------|
-| 22BIT0151 | HCLTFP1791789 | Vineeth Kumar Kondur |
-| 22BCE2504 | HCLTFP1784827 | Yashasvi Verma |
-| 22BIT0198 | HCLTFP1782131 | Prassan Agarwal |
-| 22BIT0333 | HCLTFP1789766 | Rounit Kumar |
-
----
-
-## 🚀 2. Setup and Usage Instructions
+## 🚀 Setup and Usage Instructions
 
 ### Prerequisites
 Make sure you have Python 3.9+ installed.
@@ -268,7 +256,7 @@ If the dataset is updated in the future, you can generate a new `.pkl` model fil
 python train_export_model.py
 ```
 
-## 📊 3. Model Results & Evaluation
+## 📊 Model Results & Evaluation
 
 XGBoost achieved the highest cross-validation score after extensive hyperparameter tuning using `GridSearchCV`.
 
@@ -279,7 +267,7 @@ XGBoost achieved the highest cross-validation score after extensive hyperparamet
 
 The model is highly accurate, responding rapidly and logically to massive price driving factors such as `City_Mumbai`, `Super_Area_sqft`, and `Locality_Tier_Tier 2` while successfully filtering out linear noise.
 
-## 🛠️ 4. Challenges & Mitigations
+## 🛠️ Challenges & Mitigations
 
 | Challenge | Impact | Mitigation Strategy Implemented |
 | :--- | :--- | :--- |
@@ -288,12 +276,25 @@ The model is highly accurate, responding rapidly and logically to massive price 
 | **Target Skewness** | The raw prices heavily varied from ₹3 Lakhs to ₹30 Crores, preventing normal gradient convergence. | Applied `np.log1p` target transformations across the board to shift to a normal distribution, reconstructing to INR solely on final inference via `np.expm1`. |
 | **Inference Input Mismatches** | The Streamlit UI lacked exact mapping for the 13 new One-Hot Escaped features added in the final CSV. | Exported a frozen `model_features.pkl` schema array directly from the pandas training job, looping missing inference variables natively in Streamlit. |
 
-## 📦 5. Final Deliverables List
+## 📦 Final Deliverables List
 As requested by the Hackathon Track rules:
 - [x] ML Notebook for full workflow (`Main.ipynb`)
 - [x] Cleaned dataset used for training (`house_price_dataset_india_12k_updated.csv`)
 - [x] Trained regression model (`house_price_xgb_model.pkl`)
 - [x] API/UI for predictions (`app.py` Streamlit Deployment)
 - [x] Documentation with architecture, results, and challenges (`README.md`)
+
+---
+
+---
+
+# 👥 Contributors
+
+| Reg No | ID | Name |
+|------|------|------|
+| 22BIT0151 | HCLTFP1791789 | Vineeth Kumar Kondur |
+| 22BCE2504 | HCLTFP1784827 | Yashasvi Verma |
+| 22BIT0198 | HCLTFP1782131 | Prassan Agarwal |
+| 22BIT0333 | HCLTFP1789766 | Rounit Kumar |
 
 ---

@@ -268,21 +268,7 @@ Target Variable: Market_Price_INR
 
 Models tested:
 
-IMAGE DALNA HAI
-
-- Linear Regression
-- Ridge Regression
-- Lasso Regression
-- Random Forest
-- Gradient Boosting
-- XGBoost
-
-### Evaluation Metrics
-
-- R² Score
-- RMSE
-- MAE
-- MAPE
+YAHAN PAR DALDO
 
 ---
 

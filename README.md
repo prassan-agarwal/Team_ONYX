@@ -191,27 +191,7 @@ Deployment link: https://teamonyx.streamlit.app/
 
 ---
 
-# 🔗 Repository
-
-GitHub Repo:
-
-https://github.com/prassan-agarwal/Team_ONYX
-
-
----
-
-# 👥 Contributors
-
-| Reg No | ID | Name |
-|------|------|------|
-| 22BIT0151 | HCLTFP1791789 | Vineeth Kumar Kondur |
-| 22BCE2504 | HCLTFP1784827 | Yashasvi Verma |
-| 22BIT0198 | HCLTFP1782131 | Prassan Agarwal |
-| 22BIT0333 | HCLTFP1789766 | Rounit Kumar |
-
----
-
-## 🏗️ 1. Architecture Diagram
+## 🏗️ Architecture Diagram
 
 ```mermaid
 graph TD;
@@ -236,6 +216,27 @@ graph TD;
     M --> N;
     N --> O((End-User Predictions via Web));
 ```
+---
+
+# 🔗 Repository
+
+GitHub Repo:
+
+https://github.com/prassan-agarwal/Team_ONYX
+
+
+---
+
+# 👥 Contributors
+
+| Reg No | ID | Name |
+|------|------|------|
+| 22BIT0151 | HCLTFP1791789 | Vineeth Kumar Kondur |
+| 22BCE2504 | HCLTFP1784827 | Yashasvi Verma |
+| 22BIT0198 | HCLTFP1782131 | Prassan Agarwal |
+| 22BIT0333 | HCLTFP1789766 | Rounit Kumar |
+
+---
 
 ## 🚀 2. Setup and Usage Instructions
 

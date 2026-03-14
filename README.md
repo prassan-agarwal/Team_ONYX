@@ -290,7 +290,7 @@ IMAGE DALNA HAI
 
 ### Model Performance Comparison
 
-![Model Comparison](image.png)
+![Model Comparison](model_comparision.png)
 
 Metrics shown:
 
@@ -320,10 +320,6 @@ GitHub Repo:
 https://github.com/prassan-agarwal/Team_ONYX
 
 ---
-
-# 🔗 Matplotlib Diagrams
-
-IMAGE DALNA HAI
 
 ---
 

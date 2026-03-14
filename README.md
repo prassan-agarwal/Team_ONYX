@@ -268,6 +268,8 @@ Target Variable: Market_Price_INR
 
 Models tested:
 
+IMAGE DALNA HAI
+
 - Linear Regression
 - Ridge Regression
 - Lasso Regression
@@ -316,6 +318,12 @@ Deployment link: https://teamonyx.streamlit.app/
 GitHub Repo:
 
 https://github.com/prassan-agarwal/Team_ONYX
+
+---
+
+# 🔗 Matplotlib Diagrams
+
+IMAGE DALNA HAI
 
 ---
 

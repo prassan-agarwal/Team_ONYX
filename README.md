@@ -87,3 +87,245 @@ As requested by the Hackathon Track rules:
 - [x] Trained regression model (`house_price_xgb_model.pkl`)
 - [x] API/UI for predictions (`app.py` Streamlit Deployment)
 - [x] Documentation with architecture, results, and challenges (`README.md`)
+
+
+# 🏠 House Price Prediction using Machine Learning
+
+<p align="center">
+
+![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
+![ML](https://img.shields.io/badge/Machine%20Learning-Regression-green)
+![Streamlit](https://img.shields.io/badge/Deployment-Streamlit-red?logo=streamlit)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+</p>
+
+<p align="center">
+Machine Learning system for predicting Indian house prices with explainable AI and interactive deployment.
+</p>
+
+---
+
+# 📑 Table of Contents
+
+- [About the Project](#about-the-project)
+- [Problem Statement](#problem-statement)
+- [Use Cases](#use-cases)
+- [Why Machine Learning](#why-machine-learning)
+- [Most Optimal Algorithm](#most-optimal-algorithm)
+- [Built With](#built-with)
+- [Workflow](#workflow)
+- [System Architecture](#system-architecture)
+- [UML Diagrams](#uml-diagrams)
+- [Dataset](#dataset)
+- [Algorithm Comparison](#algorithm-comparison)
+- [Visualizations](#visualizations)
+- [Deployment](#deployment)
+- [Repository](#repository)
+- [Contributors](#contributors)
+
+---
+
+# 📌 About the Project
+
+The **House Price Prediction System** predicts property prices across major Indian cities using **machine learning regression algorithms**.
+
+The system analyzes multiple factors including:
+
+- location
+- property size
+- amenities
+- neighborhood factors
+- accessibility
+
+and produces **data-driven price predictions**.
+
+The project also integrates **Explainable AI (SHAP)** to help understand how each feature influences predictions.
+
+---
+
+# ❗ Problem Statement
+
+Real estate markets often lack **transparent pricing mechanisms**.
+
+This creates several issues:
+
+- Overpriced listings
+- Underpricing of valuable properties
+- Information asymmetry between buyers and sellers
+- Potential scams for first-time buyers
+
+---
+
+# 💡 Solution
+
+This project builds a **Machine Learning based price prediction system** which:
+
+- predicts realistic house prices
+- analyzes multiple housing features
+- helps buyers avoid overpriced deals
+- helps sellers determine competitive pricing
+
+---
+
+# 🎯 Use Cases
+
+### 🏡 Home Buyers
+Identify whether a house is **fairly priced**.
+
+### 🏢 Real Estate Agents
+Use data-driven insights for **property valuation**.
+
+### 💰 Investors
+Find **undervalued properties**.
+
+### 📊 Market Analysis
+Understand **factors affecting housing prices**.
+
+---
+
+# 🚀 Most Optimal Algorithm
+
+### XGBoost Regressor
+
+XGBoost was selected as the **best performing algorithm**.
+
+### Reasons
+
+- Optimized implementation of **Gradient Boosting**
+- **Parallel processing** for faster training
+- Built-in **regularization to prevent overfitting**
+- Automatic handling of **missing values**
+- **Tree pruning** for efficient learning
+
+### Key Advantage
+
+Provides **higher performance and faster computation** on structured datasets.
+
+---
+
+# 🛠 Built With
+
+## Languages & Libraries
+
+<p>
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" height="40"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg" height="40"/>
+<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg" height="40"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" height="40"/>
+<img src="https://matplotlib.org/_static/images/logo2.svg" height="40"/>
+<img src="https://seaborn.pydata.org/_images/logo-mark-lightbg.svg" height="40"/>
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" height="40"/>
+<img src="https://raw.githubusercontent.com/microsoft/LightGBM/master/docs/logo/LightGBM_logo_black_text.svg" height="40"/>
+<img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="40"/>
+
+</p>
+
+
+---
+
+# 📐 UML Diagrams
+
+Complete UML diagrams available here:
+
+🔗 https://drive.google.com/drive/folders/1VRr40DR-97ZAUllACQKfAUxrHVF5nbCf
+
+Included diagrams:
+
+- ER Diagram
+- Use Case Diagram
+- System Architecture
+- Workflow Diagram
+
+---
+
+# 📊 Dataset
+
+Dataset Source:
+
+🔗 https://www.kaggle.com/datasets/pratikchoudhary291/india-house-price-prediction-dataset
+
+Dataset contains **12,000 property records across Indian cities**.
+
+Key features include:
+
+- City
+- Locality Tier
+- BHK
+- Super Area
+- Carpet Area
+- Parking
+- Distance to Metro
+- Crime Rate
+- Nearby Amenities
+
+Target Variable: Market_Price_INR
+
+
+---
+
+# 📈 Algorithm Comparison
+
+Models tested:
+
+- Linear Regression
+- Ridge Regression
+- Lasso Regression
+- Random Forest
+- Gradient Boosting
+- XGBoost
+
+### Evaluation Metrics
+
+- R² Score
+- RMSE
+- MAE
+- MAPE
+
+---
+
+# 📊 Visualizations
+
+### Model Performance Comparison
+
+![Model Comparison](image.png)
+
+Metrics shown:
+
+- R² Score (higher is better)
+- RMSE (lower is better)
+- MAPE (lower is better)
+
+---
+
+# 🌐 Deployment
+
+Streamlit deployment allows users to:
+
+- enter property details
+- upload CSV files
+- receive real-time predictions
+
+Deployment link: https://teamonyx.streamlit.app/
+
+
+---
+
+# 🔗 Repository
+
+GitHub Repo:
+
+https://github.com/prassan-agarwal/Team_ONYX
+
+---
+
+# 👥 Contributors
+
+| Reg No | ID | Name |
+|------|------|------|
+| 22BIT0151 | HCLTFP1791789 | Vineeth Kumar Kondur |
+| 22BCE2504 | HCLTFP1784827 | Yashasvi Verma |
+| 22BIT0198 | HCLTFP1782131 | Prassan Agarwal |
+| 22BIT0333 | HCLTFP1789766 | Rounit Kumar |
+
+---

@@ -183,8 +183,8 @@ Metrics shown:
 
 Streamlit deployment allows users to:
 
-- enter property details
-- receive real-time predictions
+- Enter property details
+- Receive real-time predictions
 
 Deployment link: https://teamonyx.streamlit.app/
 
@@ -197,7 +197,6 @@ GitHub Repo:
 
 https://github.com/prassan-agarwal/Team_ONYX
 
----
 
 ---
 

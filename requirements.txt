@@ -1,9 +1,6 @@
+streamlit
 pandas
 numpy
-scikit-learn
+joblib
 xgboost
-lightgbm
-streamlit
-matplotlib
-seaborn
 altair==4.2.2

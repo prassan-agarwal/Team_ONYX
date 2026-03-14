@@ -96,6 +96,7 @@ Provides **higher performance and faster computation** on structured datasets.
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/XGBoost_logo.png" height="40"/>
 <img src="https://raw.githubusercontent.com/microsoft/LightGBM/master/docs/logo/LightGBM_logo_black_text.svg" height="40"/>
 <img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="40"/>
+<img src="https://streamlit.io/images/brand/streamlit-logo-secondary-colormark-darktext.png" height="40">
 
 </p>
 
@@ -188,6 +189,8 @@ Streamlit deployment allows users to:
 
 Deployment link: https://teamonyx.streamlit.app/
 
+## Docker:
+This repository includes a complete Dockerfile for seamless deployment. Containerizing this machine learning pipeline ensures that the application (with its specific xgboost and scikit-learn dependencies) runs flawlessly on any judge's machine or cloud server, eliminating the classic "it works on my machine" problem.
 
 ---
 

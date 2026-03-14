@@ -89,43 +89,6 @@ As requested by the Hackathon Track rules:
 - [x] Documentation with architecture, results, and challenges (`README.md`)
 
 
-# 🏠 House Price Prediction using Machine Learning
-
-<p align="center">
-
-![Python](https://img.shields.io/badge/Python-3.9+-blue?logo=python)
-![ML](https://img.shields.io/badge/Machine%20Learning-Regression-green)
-![Streamlit](https://img.shields.io/badge/Deployment-Streamlit-red?logo=streamlit)
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
-</p>
-
-<p align="center">
-Machine Learning system for predicting Indian house prices with explainable AI and interactive deployment.
-</p>
-
----
-
-# 📑 Table of Contents
-
-- [About the Project](#about-the-project)
-- [Problem Statement](#problem-statement)
-- [Use Cases](#use-cases)
-- [Why Machine Learning](#why-machine-learning)
-- [Most Optimal Algorithm](#most-optimal-algorithm)
-- [Built With](#built-with)
-- [Workflow](#workflow)
-- [System Architecture](#system-architecture)
-- [UML Diagrams](#uml-diagrams)
-- [Dataset](#dataset)
-- [Algorithm Comparison](#algorithm-comparison)
-- [Visualizations](#visualizations)
-- [Deployment](#deployment)
-- [Repository](#repository)
-- [Contributors](#contributors)
-
----
-
 # 📌 About the Project
 
 The **House Price Prediction System** predicts property prices across major Indian cities using **machine learning regression algorithms**.

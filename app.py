@@ -145,51 +145,212 @@ def predict_price():
 
 def apply_business_rules(base_price):
     price = base_price
+    breakdown = []
     
-    # 1. Cramped Layout Penalty (Less than 400 sqft per room)
-    sqft_per_room = carpet_area / bhk if bhk > 0 else 0
-    if sqft_per_room < 400:
-        # e.g., 200 sqft/room means a 50% deficit * 0.5 strictness = 25% price drop
-        cramped_deficit = (400 - sqft_per_room) / 400
-        penalty_percentage = min(cramped_deficit * 0.5, 0.30)  # Max 30% penalty
-        price *= (1 - penalty_percentage)
-        
-    # 2. Age Depreciation (older=cheaper)
-    age_penalty = min(property_age * 0.015, 0.50) # 1.5% per year, max 50%
-    price *= (1 - age_penalty)
+    # 1. Layout & Interior Logic
+    area_ratio = carpet_area / super_area if super_area > 0 else 0
+    if bathrooms < bhk:
+        price *= 0.90
+        breakdown.append("-10% (Fewer Bathrooms than Bedrooms)")
+    elif bathrooms > bhk:
+        price *= 1.05
+        breakdown.append("+5% (Luxury Bathroom Count)")
+    if area_ratio > 0.8:
+        price *= 1.06
+        breakdown.append("+6% (Highly Efficient Carpet Area)")
+    elif area_ratio < 0.6:
+        price *= 0.90
+        breakdown.append("-10% (Poor Layout / Wasted Super Area)")
+    if super_area > 2000:
+        price *= 1.08
+        breakdown.append("+8% (Large Luxury Living Space)")
+
+    # 2. Floor Related Logic
+    if floor_no == 0:
+        price *= 0.92
+        breakdown.append("-8% (Ground Floor Privacy/Noise Concerns)")
+    elif total_floors > 0 and floor_no == total_floors:
+        price *= 0.95
+        breakdown.append("-5% (Top Floor Heat Penalty)")
+    elif total_floors > 0 and abs(floor_no - (total_floors / 2)) <= 2:
+        price *= 1.04
+        breakdown.append("+4% (Optimal Mid-Floor Placement)")
+    if floor_no > 25:
+        price *= 0.96
+        breakdown.append("-4% (Very High Floor / Lift Risk)")
+
+    # 3. Vastu / Facing Logic
+    if facing == "East": 
+        price *= 1.05
+        breakdown.append("+5% (East Facing Vastu Premium)")
+    elif facing == "North": 
+        price *= 1.04
+        breakdown.append("+4% (North Facing Vastu Premium)")
+    elif facing == "North-East": 
+        price *= 1.07
+        breakdown.append("+7% (North-East Facing Vastu Premium)")
+    elif facing == "South-West": 
+        price *= 0.96
+        breakdown.append("-4% (South-West Facing Penalty)")
+
+    # 4. Parking Rules
+    if parking == "No": 
+        price *= 0.90
+        breakdown.append("-10% (No Parking Available)")
+    elif parking == "Yes": 
+        price *= 1.03
+        breakdown.append("+3% (Parking Available)")
+        if super_area > 1800: 
+            price *= 1.04
+            breakdown.append("+4% (Luxury Property Parking Premium)")
+
+    # 5. Builder Quality Logic
+    if builder_tier == "Branded": 
+        price *= 1.10
+        breakdown.append("+10% (Branded/Reputed Builder)")
+    elif builder_tier == "Local": 
+        price *= 0.95
+        breakdown.append("-5% (Local Builder Risk)")
+
+    # 6. Age Logic
+    if property_age <= 2: 
+        price *= 1.05
+        breakdown.append("+5% (New/Recently Built Property)")
+    elif property_age > 35: 
+        price *= 0.80
+        breakdown.append("-20% (Very Old Building Depreciation)")
+    elif property_age > 20: 
+        price *= 0.90
+        breakdown.append("-10% (Old Property Depreciation)")
+
+    # 7. Balcony Logic
+    if balcony_count >= 2: 
+        price *= 1.03
+        breakdown.append("+3% (Multiple Balconies)")
+    if balcony_count > bhk + 2: 
+        price *= 0.95
+        breakdown.append("-5% (Excess Balcony / Wasted Space)")
+
+    # 8. Infrastructure Logic
+    if dist_metro < 1: 
+        price *= 1.10
+        breakdown.append("+10% (Walking Distance to Metro)")
+    elif dist_metro < 3: 
+        price *= 1.05
+        breakdown.append("+5% (Near Metro Station)")
+    elif dist_metro > 10: 
+        price *= 0.95
+        breakdown.append("-5% (Far from Metro Access)")
     
-    # 3. Tier Multiplier (Tier 2/3 must be significantly cheaper)
-    if locality_tier == 'Tier 2':
-        price *= 0.85 # 15% discount vs Tier 1 baseline
-    elif locality_tier == 'Tier 3':
-        price *= 0.70 # 30% discount vs Tier 1 baseline
+    if dist_it_hub < 5: 
+        price *= 1.06
+        breakdown.append("+6% (Close to IT Hub/Employment)")
+    elif dist_it_hub > 20: 
+        price *= 0.92
+        breakdown.append("-8% (Long Commute to IT Hubs)")
+
+    # 9. Family Friendly Rules
+    if dist_school < 1: 
+        price *= 1.04
+        breakdown.append("+4% (Extremely Close to Schools)")
+    if dist_hospital < 1: 
+        price *= 1.03
+        breakdown.append("+3% (Extremely Close to Hospitals)")
+
+    # 10. Road Quality Logic
+    if road_width > 40: 
+        price *= 1.05
+        breakdown.append("+5% (Wide Access Road)")
+    elif road_width < 20: 
+        price *= 0.92
+        breakdown.append("-8% (Narrow Access Road)")
+
+    # 11. Security Logic
+    if gated == "Yes": 
+        price *= 1.05
+        breakdown.append("+5% (Gated Society Security)")
+    if lift == "Yes": 
+        price *= 1.03
+        breakdown.append("+3% (Lift Available)")
+    if floor_no > 3 and lift == "No": 
+        price *= 0.90
+        breakdown.append("-10% (No Lift for High Floor)")
+
+    # 12. Legal & Trust Rules
+    if rera == "Yes": 
+        price *= 1.03
+        breakdown.append("+3% (RERA Registered/Verified)")
+    if bank_app == "Yes": 
+        price *= 1.02
+        breakdown.append("+2% (Bank Approved Project)")
+
+    # 13. Furnishing Logic
+    if furnishing == "Fully Furnished": 
+        price *= 1.05
+        breakdown.append("+5% (Fully Furnished)")
+    elif furnishing == "Semi-Furnished": 
+        price *= 1.02
+        breakdown.append("+2% (Semi Furnished)")
+
+    # 14. Crime Rate Logic
+    if crime_rate < 20: 
+        price *= 1.05
+        breakdown.append("+5% (Very Safe Neighborhood)")
+    elif crime_rate > 60: 
+        price *= 0.90
+        breakdown.append("-10% (High Crime Rate Penalty)")
+
+    # 15. Luxury Detection Rule
+    if bhk >= 4 and super_area > 2500: 
+        price *= 1.12
+        breakdown.append("+12% (Ultra-Luxury Layout Detected)")
+
+    # 16. Micro Location Logic
+    if dist_city < 5: 
+        price *= 1.07
+        breakdown.append("+7% (City Center Proximity)")
+    elif dist_city > 20: 
+        price *= 0.90
+        breakdown.append("-10% (Far Suburb Location)")
+
+    # 17. Property Type Logic
+    if property_type == "Villa": 
+        price *= 1.20
+        breakdown.append("+20% (Villa Premium)")
+    elif property_type == "Independent House": 
+        price *= 1.15
+        breakdown.append("+15% (Independent House Premium)")
+
+    # 18. Ownership Type Logic
+    if ownership_type == "Freehold": 
+        price *= 1.04
+        breakdown.append("+4% (Freehold Ownership)")
+    elif ownership_type == "Leasehold": 
+        price *= 0.94
+        breakdown.append("-6% (Leasehold Restrictions)")
+
+    # 19. Transaction Logic
+    if transaction_type == "New": 
+        price *= 1.03
+        breakdown.append("+3% (Brand New Property)")
+    elif transaction_type == "Resale": 
+        price *= 0.97
+        breakdown.append("-3% (Resale Depreciation)")
+
+    # 20. Density Logic
+    if total_floors > 40: 
+        price *= 0.97
+        breakdown.append("-3% (Overcrowded High-Rise Penalty)")
         
-    # 4. Wasted Balcony Penalty
-    if balcony_count > bhk:
-        excess_balconies = balcony_count - bhk
-        balcony_penalty = min(excess_balconies * 0.03, 0.15) # 3% per excess balcony, max 15%
-        price *= (1 - balcony_penalty)
-        
-    # 5. High Floor Premium (> 5th floor)
-    if floor_no > 5:
-        premium_floors = floor_no - 5
-        floor_premium = min(premium_floors * 0.005, 0.15) # 0.5% premium per floor, max 15%
-        price *= (1 + floor_premium)
-        
-    # 6. Distance Penalty (> 15km)
-    max_dist = max(dist_it_hub, dist_city)
-    if max_dist > 15:
-        dist_excess = max_dist - 15
-        dist_penalty = min(dist_excess * 0.01, 0.25) # 1% penalty per km, max 25%
-        price *= (1 - dist_penalty)
-        
-    # 7. Crime Rate Penalty (> 50)
-    if crime_rate > 50:
-        crime_excess = crime_rate - 50
-        crime_penalty = min(crime_excess * 0.005, 0.25) # 0.5% drop per point over 50, max 25%
-        price *= (1 - crime_penalty)
-        
-    return price
+    # 21. Tier Strictness Override
+    if locality_tier == 'Tier 2': 
+        price *= 0.85
+        breakdown.append("-15% (Tier 2 City Adjustment)")
+    elif locality_tier == 'Tier 3': 
+        price *= 0.70
+        breakdown.append("-30% (Tier 3 City Adjustment)")
+
+    return price, breakdown
 
 st.markdown("---")
 # Centered predict button
@@ -213,15 +374,19 @@ with col2:
         else:
             with st.spinner("Calculating via XGBoost..."):
                 base_price = predict_price()
-                final_price = apply_business_rules(base_price)
+                final_price, breakdown = apply_business_rules(base_price)
                 
                 st.success(f"### 🏠 Estimated Market Price: ₹ {final_price:,.2f}")
-                if final_price < base_price:
-                    discount = (base_price - final_price) / base_price * 100
-                    st.caption(f"*(Note: Price was dynamically penalized by {discount:.1f}% due to strict property constraint formulas)*")
-                elif final_price > base_price:
-                    premium = (final_price - base_price) / base_price * 100
-                    st.caption(f"*(Note: Price includes a {premium:.1f}% premium for higher-floor advantages)*")
+                
+                # Render the Score Breakdown beautifully
+                if breakdown:
+                    st.markdown("#### 🤖 Real Estate AI Scoring Breakdown:")
+                    st.caption("Here is exactly how the base machine learning model valuation was dynamically adjusted based on market realities:")
+                    for rule in breakdown:
+                        if "+" in rule:
+                            st.markdown(f"**<span style='color: #4CAF50;'>{rule}</span>**", unsafe_allow_html=True)
+                        else:
+                            st.markdown(f"**<span style='color: #F44336;'>{rule}</span>**", unsafe_allow_html=True)
                 
                 # --------- SAVE TO CSV LOGIC ---------
                 # Convert the specific user choices into a dictionary for logging

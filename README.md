@@ -4,8 +4,6 @@ This repository contains an end-to-end Machine Learning Regression pipeline desi
 
 ---
 
----
-
 # 📌 About the Project
 
 The **House Price Prediction System** predicts property prices across major Indian cities using **machine learning regression algorithms**.

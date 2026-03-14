@@ -267,13 +267,16 @@ Target Variable: Market_Price_INR
 # 📈 Algorithm Comparison
 
 Models tested:
-
+### Xg_boost
 ![xg_boost](xg_boost.jpeg)
 ---
+###Light_gbm
 ![light_gbm](light_gbm.jpeg)
 ---
+###Gradient_boosting
 ![gradient_boosting](gradient_boosting.jpeg)
 ---
+###Tuned_model_comparision
 ![tuned_model_comparision](tuned_model_comparision.jpeg)
 
 ---

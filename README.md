@@ -288,9 +288,16 @@ IMAGE DALNA HAI
 
 # 📊 Visualizations
 
-### Model Performance Comparison
+# 📊 Visualizations
 
-![Model Comparison](model_comparision.png)
+### Model Comparison
+![Model Comparison](model_comparison.png)
+
+### Feature Importance
+![Feature Importance](feature_importance.png)
+
+### Correlation Heatmap
+![Correlation](correlation_heatmap.png)
 
 Metrics shown:
 
